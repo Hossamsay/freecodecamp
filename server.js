@@ -1,58 +1,42 @@
-// server.js
-// where your node app starts
-
-// init project
 var express = require('express');
 var app = express();
 
-// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-// so that your API is remotely testable by FCC 
-var cors = require('cors');
-app.use(cors({optionSuccessStatus: 200}));  // some legacy browsers choke on 204
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
-
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+app.get('/', function(req, res) {
+	res.send('<p>Example usage:</p><code>http://localhost:8080/December%2015,%202015</code><br><code>http://localhost:8080/1450137600</code>');
 });
 
-var time = Date.now()
-app.get("/"+time, function (req, res) {
-  res.json({utc: time});
-});
-app.get("/"+time.getTime(), function (req, res) {
-  res.json({unix: time.getTime()});
-});
+app.get('/:date([0-9]*)', function(req, res) {
+	var result = { "unix": null, "natural": null };
+	var timestamp = parseInt(req.params.date);
 
+	var date = new Date(timestamp * 1000);
+	result.unix = timestamp;
+	result.natural = (months[date.getMonth()]) + ' ' + date.getDate() + ', ' + date.getFullYear();
 
-app.get("/api/timestamp/", (req, res) => {
-  res.json({ unix: Date.now(), utc: Date() });
+	res.send(result);
 });
 
-app.get("/api/timestamp/:date_string", (req, res) => {
-  let dateString = req.params.date_string;
+app.get('/:natString([a-zA-Z]*)', function(req, res) {
+	var result = { "unix": null, "natural": null };
+	var dateArr = req.params.natString.split(' ');
 
-  if (/\d{5,}/.test(dateString)) {
-    var dateInt = parseInt(dateString);
+	if (months.indexOf(dateArr[0]) > -1) {
+		var month = months.indexOf(dateArr[0]);
+		var day = dateArr[1].replace(',', '');
+		var year = dateArr[2];
 
-    res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
-  }
+		var date = new Date(year, month, day);
+		result.unix = date.getTime() / 1000;
+		result.natural = (months[date.getMonth()]) + ' ' + date.getDate() + ', ' + date.getFullYear();
 
-  let dateObject = new Date(dateString);
+		res.send(result);
+	}
 
-  if (dateObject.toString() === "Invalid Date") {
-    res.json({ error: "Invaid Date" });
-  } else {
-    res.json({ unix: dateObject.valueOf(), utc: dateObject.toUTCString() });
-  }
+	res.send(result);
 });
 
-
-
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+app.listen(8080, function() {
+	console.log('App listening on port 8080.');
 });
-
