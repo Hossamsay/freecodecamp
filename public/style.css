@@ -1,50 +1,53 @@
-@mixin border-radius($radius){
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
+/****** Main Styling ******/
 
-$textColor: rgb(50,0,0);
-$textColorHover: rgb(90,0,0);
-
-a:link {
-    color: $textColor;
-}
-
-a:visited {
-    color: $textColor;
-}
-
-a:hover {
-    color: $textColorHover;
-}
-
-a:active {
-    color: $textColorHover;
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	color: #222;
+	background-color: #FaFaFa;
+	text-align: center;
+	line-height: 1.4em;
 }
 
 .container {
-  @include border-radius(10px);
-  margin-right: auto;
-  margin-left: auto;
-  background-color: rgba(0,30,0,0.3);
-  color: $textColor;
-  padding: 10px;
-  margin: 10px;
+	padding: 0;
+	margin-top: 40px;
 }
 
-.examples {
-  @extend .container
+h3 {
+  margin-top: 30px;
 }
 
-.instructions {
-  @extend .container
+.footer {
+	margin-top: 40px;
 }
 
-.title {
-  @extend .container
+.user-stories {
+  position: relative;
+  text-align: justify;
+  max-width: 700px;
+  margin: 15px auto;
+}
+code {
+  font-family: monospace;
+  padding: 2px;
+  color: black;
+  background-color: #fff;
+}
+ol {
+	list-style-position: outside;
+}
+ul {
+	list-style-type: none;
 }
 
+li {
+  margin-bottom: 0.5em;
+}
+.user-stories li {
+  margin-bottom: 1em;
+}
 
-
+a {
+	color: #2574A9;
+}

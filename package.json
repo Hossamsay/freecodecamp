@@ -1,23 +1,27 @@
 {
-	"name": "fcc-timestamp-microserver",
-	"version": "0.1.0",
-	"description": "Example project showing how to use Sass middleware",
+	"name": "fcc-api-projects-boilerplate",
+	"version": "0.0.1",
+	"description": "An FCC Backend Challenge",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
 	},
 	"dependencies": {
-		"express": "^4.14.1",
-		"node-sass-middleware": "^0.11.0",
-		"moment": "^2.17.1"
+		"express": "^4.12.4",
+		"cors": "^2.8.0"
 	},
 	"engines": {
 		"node": "4.4.5"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://githost.com/camper/repo.git"
+	},
 	"keywords": [
 		"node",
+		"hyperdev",
 		"express",
-		"sass"
+		"freecodecamp"
 	],
 	"license": "MIT"
 }
