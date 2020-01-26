@@ -12,7 +12,7 @@ app.use(express.static('/tmp'));
 
     // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {    
-    response.sendFile(__dirname + '/views/index.html');
+    response.sendFile(__dirname + '/public/index.html');
 });
 
 app.get("/:timeInput", function (request, response) {     

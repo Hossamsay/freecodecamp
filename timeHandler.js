@@ -1,4 +1,3 @@
-//ten digits should suffice for unix time stamp
 let moment = require('moment');
 module.exports = function(timeInput) {
   
